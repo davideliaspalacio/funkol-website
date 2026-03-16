@@ -1,0 +1,232 @@
+---
+const appStoreUrl = "#";
+const googlePlayUrl = "#";
+
+const avatarColors = [
+  { bg: "linear-gradient(135deg, #667eea, #764ba2)", delay: "0s" },
+  { bg: "linear-gradient(135deg, #f093fb, #f5576c)", delay: "0.3s" },
+  { bg: "linear-gradient(135deg, #4facfe, #00f2fe)", delay: "0.6s" },
+  { bg: "linear-gradient(135deg, #43e97b, #38f9d7)", delay: "0.9s" },
+];
+---
+
+<section class="join section-curve" id="download">
+  <span class="emoji je1">🎉</span>
+  <span class="emoji je2">📱</span>
+
+  {
+    avatarColors.map((a, i) => (
+      <div
+        class={`avatar-float af-${i + 1}`}
+        style={`background: ${a.bg}; animation-delay: ${a.delay}`}
+        data-reveal="pop"
+        data-delay={String(i * 0.1)}
+      />
+    ))
+  }
+
+  <div class="join-inner">
+    <h2 class="heading-giant join-heading" data-reveal data-delay="0">
+      únete al<br />movimiento
+    </h2>
+
+    <div class="join-content">
+      <div class="qr-box" aria-label="Código QR de descarga" data-reveal="scale" data-delay="0.15">
+        <span class="qr-emoji">📱</span>
+        <span class="qr-label">escanea para descargar</span>
+      </div>
+
+      <div class="store-buttons" data-reveal data-delay="0.25">
+        <a href={appStoreUrl} class="store-btn apple">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+            ></path>
+          </svg>
+          <div class="btn-text">
+            <span class="btn-sub">Disponible en</span>
+            <span class="btn-main">App Store</span>
+          </div>
+        </a>
+
+        <a href={googlePlayUrl} class="store-btn android">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M3.18 23.76c.3.17.64.22.99.14l12.12-6.99-2.61-2.61-10.5 9.46zM.54 1.96C.2 2.3 0 2.87 0 3.61v16.78c0 .74.2 1.31.55 1.65l.09.08 9.4-9.4v-.22L.63 1.88l-.09.08zM20.46 10.37l-2.6-1.5-2.93 2.93 2.93 2.93 2.61-1.51c.75-.43.75-1.12 0-1.55l-.01-.3zM3.18.24L15.3 7.23l-2.61 2.61L2.17.38C2.47.2 2.87.19 3.18.24z"
+            ></path>
+          </svg>
+          <div class="btn-text">
+            <span class="btn-sub">Disponible en</span>
+            <span class="btn-main">Google Play</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .join {
+    background: var(--gradient);
+    position: relative;
+    z-index: 5;
+    padding: 7rem 2rem 8rem;
+    overflow: hidden;
+  }
+
+  .join-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .join-heading {
+    color: var(--white);
+    text-align: center;
+    text-shadow: 0 4px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .join-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* QR box */
+  .qr-box {
+    width: 160px;
+    height: 160px;
+    background: var(--white);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition:
+      transform 0.3s var(--ease-spring),
+      box-shadow 0.3s ease;
+  }
+
+  .qr-box:hover {
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+  }
+
+  .qr-emoji {
+    font-size: 3rem;
+  }
+
+  .qr-label {
+    font-size: 0.7rem;
+    color: #666;
+    font-weight: 500;
+    text-align: center;
+    padding: 0 0.5rem;
+  }
+
+  /* Store buttons */
+  .store-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .store-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(0, 0, 0, 0.55);
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.9rem 1.75rem;
+    border-radius: 14px;
+    min-width: 200px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition:
+      background 0.25s ease,
+      transform 0.3s var(--ease-spring),
+      box-shadow 0.3s ease;
+  }
+
+  .store-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.04) translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+  }
+
+  .store-btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-sub {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    font-weight: 400;
+  }
+
+  .btn-main {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* Floating avatars */
+  .avatar-float {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    transition: transform 0.3s var(--ease-spring);
+  }
+
+  .avatar-float.is-visible {
+    animation: float 4s ease-in-out infinite;
+    animation-delay: inherit;
+  }
+
+  .af-1 { top: 12%; left: 8%; }
+  .af-2 { top: 12%; right: 8%; }
+  .af-3 { bottom: 12%; left: 8%; }
+  .af-4 { bottom: 12%; right: 8%; }
+
+  /* Floating emojis */
+  .emoji {
+    position: absolute;
+    font-size: 3rem;
+    pointer-events: none;
+    animation: float-fast 3s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  .je1 {
+    top: 20%;
+    left: 20%;
+    animation-duration: 3s;
+  }
+  .je2 {
+    top: 20%;
+    right: 20%;
+    animation-duration: 3.5s;
+    animation-delay: 0.4s;
+  }
+
+  @media (max-width: 768px) {
+    .avatar-float { display: none; }
+  }
+</style>

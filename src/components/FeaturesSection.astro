@@ -1,0 +1,560 @@
+---
+const featureData = [
+  {
+    text: "cobra por mensajes",
+    gradient: false,
+    bubbles: ["$15 cobrado 💬", "+$8 nuevo msj", "$50 en tu cuenta", "¡$30 recibido!"],
+    images:  ["/microphonechat.png", "/calendar.png", "/aceptOrDecline.png", "/microphone.png"],
+  },
+  {
+    text: "videollamadas de pago",
+    gradient: true,
+    bubbles: ["$75 por la llamada 📞", "+$100 sesión", "cobré $200 hoy 🔥", "$50 nuevos"],
+    images:  ["/calendar.png", "/microphonechat.png", "/personInPc.png", "/world.png"],
+  },
+  {
+    text: "tú pones tu precio",
+    gradient: false,
+    bubbles: ["puse $40 y llegó 💰", "+$80 a mi precio", "$45 mi tarifa", "cobré lo que quise"],
+    images:  ["/aceptOrDecline.png", "/cohete.png", "/microphone.png", "/world.png"],
+  },
+  {
+    text: "fans que pagan",
+    gradient: true,
+    bubbles: ["$500 este mes 🚀", "+$1k de fans", "cashout de $200 💸", "¡$800 recibido!"],
+    images:  ["/emojis.png", "/personInPc.png", "/cohete.png", "/manoApuntando.png"],
+  },
+];
+
+const initial = featureData[0];
+---
+
+<section class="features section-curve">
+
+  <img src={initial.images[0]} class="deco fe1" width="160" height="160" aria-hidden="true" alt="" />
+  <img src={initial.images[1]} class="deco fe2" width="110" height="110" aria-hidden="true" alt="" />
+  <img src={initial.images[2]} class="deco fe3" width="220" height="160" aria-hidden="true" alt="" />
+  <img src={initial.images[3]} class="deco fe4" width="130" height="130" aria-hidden="true" alt="" />
+
+  {initial.bubbles.map((text, i) => (
+    <div class={`bubble bubble-${i + 1}`} data-reveal="pop" data-delay={String(i * 0.12)}>
+      {text}
+    </div>
+  ))}
+
+  <div class="features-inner">
+    <div class="features-list" id="features-list">
+      {featureData.map((f, i) => (
+        <div
+          class="feature-item"
+          data-reveal
+          data-delay={String(i * 0.09)}
+          data-index={String(i)}
+        >
+          <span class={`feature-line ${f.gradient ? "gradient" : ""}`}>{f.text}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="download-wrap" data-reveal="pop" data-delay="0.4">
+      <a href="#" class="download-btn">
+        <span class="download-btn-icon">
+          <!-- Apple -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        </span>
+        <span class="download-btn-text">
+          <span class="download-btn-sub">descarga gratis</span>
+          <span class="download-btn-main">funkol</span>
+        </span>
+        <span class="download-btn-icon">
+          <!-- Android -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.22.99.14l12.12-6.99-2.61-2.61-10.5 9.46zM.54 1.96C.2 2.3 0 2.87 0 3.61v16.78c0 .74.2 1.31.55 1.65l.09.08 9.4-9.4v-.22L.63 1.88l-.09.08zM20.46 10.37l-2.6-1.5-2.93 2.93 2.93 2.93 2.61-1.51c.75-.43.75-1.12 0-1.55l-.01-.3zM3.18.24L15.3 7.23l-2.61 2.61L2.17.38C2.47.2 2.87.19 3.18.24z"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Mobile carousel ── -->
+  <div class="mob-carousel">
+    <div class="mob-track">
+      {featureData.map((f, i) => (
+        <div class={`mob-slide ${i === 0 ? "is-active" : ""}`} data-mslide={String(i)}>
+          <span class={`mob-title ${f.gradient ? "gradient" : ""}`}>{f.text}</span>
+          <div class="mob-row mob-row-a">
+            <div class="mob-bubble">{f.bubbles[0]}</div>
+            <img src={f.images[0]} class="mob-img" alt="" />
+          </div>
+          <div class="mob-row mob-row-b">
+            <img src={f.images[1]} class="mob-img" alt="" />
+            <div class="mob-bubble">{f.bubbles[1]}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mob-dots">
+      {featureData.map((_, i) => (
+        <span class={`mob-dot ${i === 0 ? "is-active" : ""}`} data-mdot={String(i)}></span>
+      ))}
+    </div>
+
+    <div class="mob-download">
+      <a href="#" class="download-btn">
+        <span class="download-btn-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        </span>
+        <span class="download-btn-text">
+          <span class="download-btn-sub">descarga gratis</span>
+          <span class="download-btn-main">funkol</span>
+        </span>
+        <span class="download-btn-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.22.99.14l12.12-6.99-2.61-2.61-10.5 9.46zM.54 1.96C.2 2.3 0 2.87 0 3.61v16.78c0 .74.2 1.31.55 1.65l.09.08 9.4-9.4v-.22L.63 1.88l-.09.08zM20.46 10.37l-2.6-1.5-2.93 2.93 2.93 2.93 2.61-1.51c.75-.43.75-1.12 0-1.55l-.01-.3zM3.18.24L15.3 7.23l-2.61 2.61L2.17.38C2.47.2 2.87.19 3.18.24z"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  interface FeatureEntry { bubbles: string[]; images: string[]; }
+
+  const FEATURE_DATA: FeatureEntry[] = [
+    {
+      bubbles: ["$15 cobrado 💬", "+$8 nuevo msj", "$50 en tu cuenta", "¡$30 recibido!"],
+      images:  ["/microphonechat.png", "/calendar.png", "/aceptOrDecline.png", "/microphone.png"],
+    },
+    {
+      bubbles: ["$75 por la llamada 📞", "+$100 sesión", "cobré $200 hoy 🔥", "$50 nuevos"],
+      images:  ["/calendar.png", "/microphonechat.png", "/personInPc.png", "/world.png"],
+    },
+    {
+      bubbles: ["puse $40 y llegó 💰", "+$80 a mi precio", "$45 mi tarifa", "cobré lo que quise"],
+      images:  ["/aceptOrDecline.png", "/cohete.png", "/microphone.png", "/world.png"],
+    },
+    {
+      bubbles: ["$500 este mes 🚀", "+$1k de fans", "cashout de $200 💸", "¡$800 recibido!"],
+      images:  ["/emojis.png", "/personInPc.png", "/cohete.png", "/manoApuntando.png"],
+    },
+  ];
+
+  // Cada feature mueve los 4 bubbles a posiciones distintas (translate relativo a su base)
+  const OFFSETS = [
+    // feature 0 — posición base
+    ["translate(0px,   0px)  rotate(0deg)",
+     "translate(0px,   0px)  rotate(0deg)",
+     "translate(0px,   0px)  rotate(0deg)",
+     "translate(0px,   0px)  rotate(0deg)"],
+    // feature 1 — videollamadas
+    ["translate(-70px,  80px) rotate(-4deg)",
+     "translate( 80px, -55px) rotate( 5deg)",
+     "translate( 90px, -70px) rotate( 3deg)",
+     "translate(-65px,  55px) rotate(-3deg)"],
+    // feature 2 — tú pones tu precio
+    ["translate( 75px, -65px) rotate( 4deg)",
+     "translate(-65px,  85px) rotate(-5deg)",
+     "translate(-85px,  65px) rotate(-4deg)",
+     "translate( 75px, -85px) rotate( 4deg)"],
+    // feature 3 — fans que pagan
+    ["translate(-55px, -85px) rotate(-3deg)",
+     "translate( 55px,  75px) rotate( 3deg)",
+     "translate( 85px,  90px) rotate( 5deg)",
+     "translate(-80px, -55px) rotate(-4deg)"],
+  ];
+
+  const section = document.querySelector<HTMLElement>(".features");
+  const list    = document.getElementById("features-list");
+  if (!section || !list) throw new Error("FeaturesSection: not found");
+
+  const bubbleEls = Array.from(section.querySelectorAll<HTMLElement>(".bubble"));
+  const decoEls   = Array.from(section.querySelectorAll<HTMLImageElement>(".deco"));
+  const itemEls   = Array.from(list.querySelectorAll<HTMLElement>(".feature-item"));
+
+  let current = 0;
+
+  function swapTo(index: number) {
+    if (index === current) return;
+    current = index;
+    const data    = FEATURE_DATA[index];
+    const offsets = OFFSETS[index];
+
+    // Mover bubbles a nuevas posiciones + actualizar texto de inmediato
+    bubbleEls.forEach((el, i) => {
+      el.classList.remove("is-visible");
+      el.textContent   = data.bubbles[i] ?? "";
+      el.style.transform = offsets[i];
+    });
+
+    // Cambiar imágenes decorativas
+    decoEls.forEach((el, i) => {
+      (el as HTMLImageElement).src = data.images[i] ?? (el as HTMLImageElement).src;
+    });
+
+    // Resaltar ítem activo
+    itemEls.forEach((el, i) => {
+      el.style.opacity   = i === index ? "1"          : "0.2";
+      el.style.transform = i === index ? "translateX(8px)" : "translateX(0)";
+    });
+  }
+
+  itemEls.forEach((item, i) => item.addEventListener("mouseenter", () => swapTo(i)));
+
+  list.addEventListener("mouseleave", () => {
+    // Volver a posición base y reanudar float
+    bubbleEls.forEach((el, i) => {
+      el.style.transform = OFFSETS[0][i];
+      el.classList.add("is-visible");
+    });
+    itemEls.forEach(el => { el.style.opacity = "1"; el.style.transform = ""; });
+    current = 0;
+  });
+
+  // ── Mobile carousel — auto-rotate every 1.5s ──
+  const mobSlides = Array.from(document.querySelectorAll<HTMLElement>(".mob-slide"));
+  const mobDots   = Array.from(document.querySelectorAll<HTMLElement>(".mob-dot"));
+
+  if (mobSlides.length) {
+    let mCurrent = 0;
+
+    const goTo = (i: number) => {
+      mobSlides[mCurrent].classList.remove("is-active");
+      mobDots[mCurrent].classList.remove("is-active");
+      mCurrent = i % mobSlides.length;
+      mobSlides[mCurrent].classList.add("is-active");
+      mobDots[mCurrent].classList.add("is-active");
+    };
+
+    // Tap on dots to navigate manually
+    mobDots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+
+    setInterval(() => goTo(mCurrent + 1), 1500);
+  }
+</script>
+
+<style>
+  .features {
+    background: var(--black);
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 6rem 4rem;
+    cursor: url('/cursorhand-80.png') 30 3, pointer;
+  }
+
+  .features *, .feature-item, .bubble {
+    cursor: inherit;
+  }
+
+  .features-inner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+  }
+
+  .feature-item {
+    cursor: default;
+    text-align: center;
+    transition:
+      opacity  0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .feature-line {
+    display: block;
+    font-family: var(--font-feature);
+    font-size: clamp(3.5rem, 10vw, 9.5rem);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 0.9;
+    text-transform: lowercase;
+    color: var(--white);
+    text-align: center;
+  }
+
+  .feature-line.gradient {
+    background: var(--gradient-h);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Cashout bubbles — mismo estilo que CommunitySection ── */
+  .bubble {
+    position: absolute;
+    background: var(--white);
+    color: var(--black);
+    padding: 1.4rem 2rem;
+    border-radius: 28px;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+    font-weight: 800;
+    line-height: 1.25;
+    text-align: center;
+    max-width: 300px;
+    white-space: normal;
+    z-index: 5;
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.45);
+    transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .bubble.is-visible { animation: float-slow 4.5s ease-in-out infinite; }
+
+  /* Tail */
+  .bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -16px; left: 22px;
+    width: 0; height: 0;
+    border-left: 9px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 18px solid var(--white);
+  }
+
+  /* Top-left — tail a la derecha */
+  .bubble-1 { top: 8%;    left: 12%;  }
+  .bubble-1::after { left: auto; right: 22px; border-left: 5px solid transparent; border-right: 9px solid transparent; }
+
+  /* Top-right */
+  .bubble-2 { top: 15%;  right: 13%; }
+
+  /* Mid-left — sobre el texto, solapando como NGL */
+  .bubble-3 { top: 48%;  left: 10%;  }
+  .bubble-3::after { left: auto; right: 22px; border-left: 5px solid transparent; border-right: 9px solid transparent; }
+
+  /* Bottom-right */
+  .bubble-4 { bottom: 8%; right: 12%; }
+
+  /* ── 3D deco — grandes, en esquinas ── */
+  .deco {
+    position: absolute;
+    pointer-events: none;
+    height: auto;
+    filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.4));
+    animation: float 4s ease-in-out infinite;
+    z-index: 4;
+    transition: opacity 0.18s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Superior derecha — grande */
+  .fe1 { width: 170px; top: 6%;   right: 10%; --rot: 12deg; animation-duration: 4s; }
+
+  /* Mitad izquierda */
+  .fe2 { width: 115px; top: 42%;  left: 8%;  --rot: -6deg; animation-duration: 5s;   animation-delay: 0.6s; }
+
+  /* Inferior izquierda — el más grande */
+  .fe3 { width: 230px; bottom: 4%; left: 8%; --rot: -8deg; animation-duration: 4.5s; animation-delay: 0.3s; }
+
+  /* Inferior derecha */
+  .fe4 { width: 140px; bottom: 6%; right: 10%; --rot: 10deg; animation-duration: 3.8s; animation-delay: 1s; }
+
+  /* ── Download button ── */
+  .download-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--gradient-h);
+    color: var(--white);
+    text-decoration: none;
+    padding: 1.1rem 2.4rem;
+    border-radius: 100px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    white-space: nowrap;
+    position: relative;
+    box-shadow: 0 0 0 0 rgba(0, 154, 255, 0.5);
+    animation: btn-pulse 2s ease-in-out infinite;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
+  }
+
+  @keyframes btn-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0, 154, 255, 0.55); }
+    50%       { box-shadow: 0 0 0 18px rgba(0, 154, 255, 0); }
+  }
+
+  .download-btn:hover {
+    transform: scale(1.07) translateY(-3px);
+    filter: brightness(1.1);
+    animation-play-state: paused;
+  }
+
+  .download-btn:active { transform: scale(0.96); }
+
+  .download-btn-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .download-btn-sub {
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0.85;
+    text-transform: lowercase;
+    letter-spacing: 0.03em;
+  }
+
+  .download-btn-main {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .download-btn-icon {
+    display: flex;
+    align-items: center;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 1024px) {
+    .fe3 { width: 170px; }
+    .fe1 { width: 130px; }
+  }
+
+  /* ── Mobile carousel ── */
+  .mob-carousel { display: none; }
+
+  @media (max-width: 768px) {
+    .features { padding: 6rem 1.5rem 8rem; min-height: 100vh; }
+    .bubble, .deco { display: none; }
+    .features-inner { display: none; }
+
+    .mob-carousel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 2rem;
+    }
+
+    .mob-track {
+      display: grid;
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+
+    /* Stack all slides on top of each other */
+    .mob-slide {
+      grid-column: 1;
+      grid-row: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      pointer-events: none;
+    }
+
+    .mob-slide.is-active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .mob-title {
+      display: block;
+      font-family: var(--font-feature);
+      font-size: clamp(3rem, 14vw, 5rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      text-transform: lowercase;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .mob-title.gradient {
+      background: var(--gradient-h);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .mob-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .mob-row-a { justify-content: flex-start; }
+    .mob-row-b { justify-content: flex-end; }
+
+    .mob-bubble {
+      background: var(--white);
+      color: var(--black);
+      padding: 0.9rem 1.3rem;
+      border-radius: 20px;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
+      text-align: center;
+      max-width: 54%;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+    }
+
+    .mob-row-a .mob-bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -12px; left: 18px;
+      border-left: 8px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 14px solid var(--white);
+    }
+    .mob-row-a .mob-bubble { position: relative; }
+
+    .mob-img {
+      width: clamp(90px, 30vw, 130px);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+    }
+
+    /* Dots */
+    .mob-dots {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .mob-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.3);
+      transition: width 0.3s ease, background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .mob-dot.is-active {
+      width: 28px;
+      background: var(--white);
+    }
+
+    .mob-download {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+</style>

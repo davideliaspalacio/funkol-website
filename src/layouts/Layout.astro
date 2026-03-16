@@ -1,0 +1,170 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Funkol — Cobra lo que vales",
+  description = "Tu tiempo tiene precio. Tus fans lo saben. Monetiza cada interacción con tus fans.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@800&family=Caveat:wght@700&family=Barlow+Condensed:wght@900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --pink: hsl(205, 100%, 53%);
+    --orange: hsl(192, 89%, 63%);
+    --gradient: linear-gradient(135deg, hsl(205, 100%, 53%), hsl(192, 89%, 63%));
+    --gradient-h: linear-gradient(135deg, hsl(205, 100%, 53%), hsl(192, 89%, 63%));
+    --black: #000000;
+    --white: #ffffff;
+    --cream: #fff8f0;
+    --font: "Space Grotesk", sans-serif;
+    --font-display: "Syne", sans-serif;
+    --font-bubble: "Caveat", cursive;
+    --font-feature: "Barlow Condensed", sans-serif;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    animation: body-fade-in 0.4s ease both;
+  }
+
+  @keyframes body-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .heading-giant {
+    font-size: clamp(4rem, 13vw, 10rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    text-transform: lowercase;
+  }
+
+  /* ── Float keyframes (global) ── */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
+    50%       { transform: translateY(-20px) rotate(var(--rot, 0deg)); }
+  }
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
+    50%       { transform: translateY(-14px) rotate(var(--rot, 0deg)); }
+  }
+  @keyframes float-fast {
+    0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
+    50%       { transform: translateY(-26px) rotate(var(--rot, 0deg)); }
+  }
+</style>
+
+<script>
+  // ─────────────────────────────────────────────────
+  // Scroll Reveal — JS-first (inline styles win over
+  // all CSS specificity, no conflicts with Astro scoped)
+  // ─────────────────────────────────────────────────
+  const EASE_OUT    = "cubic-bezier(0.22, 1, 0.36, 1)";
+  const EASE_SPRING = "cubic-bezier(0.34, 1.56, 0.64, 1)";
+
+  const INIT: Record<string, { transform: string; dur: string; ease: string }> = {
+    "":           { transform: "translateY(40px)",          dur: "0.7s", ease: EASE_OUT    },
+    "up":         { transform: "translateY(40px)",          dur: "0.7s", ease: EASE_OUT    },
+    "slide-left": { transform: "translateX(-52px)",         dur: "0.7s", ease: EASE_OUT    },
+    "slide-right":{ transform: "translateX(52px)",          dur: "0.7s", ease: EASE_OUT    },
+    "scale":      { transform: "scale(0.82) translateY(24px)", dur: "0.75s", ease: EASE_OUT },
+    "pop":        { transform: "scale(0.45)",               dur: "0.5s", ease: EASE_SPRING },
+    "fade":       { transform: "none",                      dur: "0.9s", ease: EASE_OUT    },
+  };
+
+  // Set initial hidden state via inline styles (max specificity)
+  const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+
+  els.forEach((el) => {
+    const key   = el.dataset.reveal ?? "";
+    const cfg   = INIT[key] ?? INIT[""];
+    const baseT = el.dataset.baseTransform ?? "";
+
+    el.style.opacity    = "0";
+    el.style.transform  = baseT ? `${baseT} ${cfg.transform}` : cfg.transform;
+    el.style.transition = `opacity ${cfg.dur} ${cfg.ease}, transform ${cfg.dur} ${cfg.ease}`;
+    el.style.willChange = "opacity, transform";
+  });
+
+  // Observe and reveal
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el    = entry.target as HTMLElement;
+        const delay = parseFloat(el.dataset.delay ?? "0") * 1000;
+        const baseT = el.dataset.baseTransform ?? "";
+
+        setTimeout(() => {
+          el.style.opacity   = "1";
+          el.style.transform = baseT || "";   // restore base or clear
+          el.classList.add("is-visible");
+
+          el.addEventListener("transitionend", () => {
+            el.style.willChange = "auto";
+            // Remove inline transform so CSS keyframe animations take over cleanly
+            if (!baseT) el.style.removeProperty("transform");
+          }, { once: true });
+        }, delay);
+
+        observer.unobserve(el);
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -48px 0px" }
+  );
+
+  els.forEach((el) => observer.observe(el));
+
+  // ── Navbar scroll state ──
+  const navbar = document.querySelector<HTMLElement>(".navbar");
+  if (navbar) {
+    const tick = () => navbar.classList.toggle("scrolled", window.scrollY > 24);
+    window.addEventListener("scroll", tick, { passive: true });
+    tick();
+  }
+</script>

@@ -1,0 +1,158 @@
+---
+const appStoreUrl = "#";
+const googlePlayUrl = "#";
+---
+
+<nav class="navbar">
+  <div class="navbar-inner">
+
+    <a href="/" class="logo">funkol</a>
+
+    <ul class="nav-links">
+      <li><a href="#sobre-nosotros">sobre nosotros</a></li>
+      <li><a href="#blog">blog</a></li>
+      <li><a href="#contacto">contacto</a></li>
+    </ul>
+
+    <div class="store-icons">
+      <a href={appStoreUrl} class="icon-btn icon-apple" aria-label="App Store">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+      </a>
+      <a href={googlePlayUrl} class="icon-btn icon-android" aria-label="Google Play">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M3.18 23.76c.3.17.64.22.99.14l12.12-6.99-2.61-2.61-10.5 9.46zM.54 1.96C.2 2.3 0 2.87 0 3.61v16.78c0 .74.2 1.31.55 1.65l.09.08 9.4-9.4v-.22L.63 1.88l-.09.08zM20.46 10.37l-2.6-1.5-2.93 2.93 2.93 2.93 2.61-1.51c.75-.43.75-1.12 0-1.55l-.01-.3zM3.18.24L15.3 7.23l-2.61 2.61L2.17.38C2.47.2 2.87.19 3.18.24z"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<style>
+  /* ── Navbar shell ── */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background: #000;
+    /* Deep dome más pronunciado */
+    border-radius: 0 0 50% 50% / 0 0 80px 80px;
+    padding: 0 4rem 28px;
+    /* Heavy shadow makes it "float" above the hero */
+    box-shadow:
+      0 8px 0px #000,
+      0 8px 48px rgba(0, 0, 0, 0.8);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .navbar.scrolled {
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+      0 8px 0px rgba(0,0,0,0.92),
+      0 12px 56px rgba(0, 0, 0, 0.9);
+  }
+
+  /* ── Inner layout ── */
+  .navbar-inner {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 104px;
+  }
+
+  /* ── Logo — Syne 800, giant, italic feel ── */
+  .logo {
+    font-family: var(--font-display);   /* Syne 800 */
+    font-size: 2.9rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    text-transform: lowercase;
+    color: var(--white);
+    text-decoration: none;
+    flex-shrink: 0;
+    line-height: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  .logo:hover { opacity: 0.65; }
+
+  /* ── Nav links ── */
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 3.5rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-links a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    display: inline-block;
+    transition: color 0.22s ease, transform 0.18s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--white);
+    transform: translateY(-1px);
+  }
+
+  /* ── Store icons con bounce ── */
+  @keyframes icon-bounce {
+    0%, 100% { transform: translateY(0);     }
+    30%       { transform: translateY(-10px); }
+    55%       { transform: translateY(-4px);  }
+    75%       { transform: translateY(-7px);  }
+    90%       { transform: translateY(-2px);  }
+  }
+
+  .store-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .icon-btn {
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    opacity: 0.85;
+    animation: icon-bounce 2.2s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+    transition: opacity 0.2s ease;
+  }
+
+  .icon-android {
+    animation-delay: 0.35s;
+  }
+
+  .icon-btn:hover {
+    opacity: 1;
+    animation-play-state: paused;
+    transform: scale(1.15);
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 0 1.75rem 20px;
+      border-radius: 0 0 50% 50% / 0 0 56px 56px;
+    }
+    .navbar-inner { height: 80px; }
+    .logo { font-size: 2.2rem; }
+    .nav-links { display: none; }
+  }
+</style>
