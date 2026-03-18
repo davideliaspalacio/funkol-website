@@ -37,23 +37,23 @@ const googlePlayUrl = "#";
     top: 0;
     z-index: 100;
     width: 100%;
-    background: #000;
+    background: var(--black);
     /* Deep dome más pronunciado */
     border-radius: 0 0 50% 50% / 0 0 80px 80px;
-    padding: 0 4rem 28px;
+    padding: 0 4rem 20px;
     /* Heavy shadow makes it "float" above the hero */
     box-shadow:
-      0 8px 0px #000,
+      0 8px 0px var(--black),
       0 8px 48px rgba(0, 0, 0, 0.8);
     transition: background 0.3s ease, box-shadow 0.3s ease;
   }
 
   .navbar.scrolled {
-    background: rgba(0, 0, 0, 0.92);
+    background: rgba(11, 21, 38, 0.92);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     box-shadow:
-      0 8px 0px rgba(0,0,0,0.92),
+      0 8px 0px rgba(11,21,38,0.92),
       0 12px 56px rgba(0, 0, 0, 0.9);
   }
 
@@ -65,13 +65,13 @@ const googlePlayUrl = "#";
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 104px;
+    height: 72px;
   }
 
   /* ── Logo — Syne 800, giant, italic feel ── */
   .logo {
     font-family: var(--font-display);   /* Syne 800 */
-    font-size: 2.9rem;
+    font-size: 2rem;
     font-weight: 800;
     letter-spacing: -0.05em;
     text-transform: lowercase;
@@ -97,7 +97,7 @@ const googlePlayUrl = "#";
   .nav-links a {
     color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
-    font-size: 1.45rem;
+    font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.01em;
     display: inline-block;
@@ -151,8 +151,8 @@ const googlePlayUrl = "#";
       padding: 0 1.75rem 20px;
       border-radius: 0 0 50% 50% / 0 0 56px 56px;
     }
-    .navbar-inner { height: 80px; }
-    .logo { font-size: 2.2rem; }
+    .navbar-inner { height: 60px; }
+    .logo { font-size: 1.6rem; }
     .nav-links { display: none; }
   }
 </style>

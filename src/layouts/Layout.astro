@@ -66,12 +66,7 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, siteU
       },
     })} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@800&family=Caveat:wght@700&family=Barlow+Condensed:wght@900&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="/fonts/Satoshi-Variable.ttf" as="font" type="font/ttf" crossorigin />
   </head>
   <body>
     <slot />
@@ -79,18 +74,25 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, siteU
 </html>
 
 <style is:global>
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('/fonts/Satoshi-Variable.ttf') format('truetype');
+    font-weight: 400 900;
+    font-display: swap;
+  }
+
   :root {
-    --pink: hsl(205, 100%, 53%);
-    --orange: hsl(192, 89%, 63%);
-    --gradient: linear-gradient(135deg, hsl(205, 100%, 53%), hsl(192, 89%, 63%));
-    --gradient-h: linear-gradient(135deg, hsl(205, 100%, 53%), hsl(192, 89%, 63%));
-    --black: #000000;
+    --primary: #479ff2;
+    --secondary: #48c5f3;
+    --gradient: linear-gradient(111deg, #479ff2 0%, #48c5f3 100%);
+    --gradient-h: linear-gradient(111deg, #479ff2 0%, #48c5f3 100%);
+    --black: #0b1526;
     --white: #ffffff;
-    --cream: #fff8f0;
-    --font: "Space Grotesk", sans-serif;
-    --font-display: "Syne", sans-serif;
-    --font-bubble: "Caveat", cursive;
-    --font-feature: "Barlow Condensed", sans-serif;
+    --cream: #f4f5f8;
+    --font: 'Satoshi', sans-serif;
+    --font-display: 'Satoshi', sans-serif;
+    --font-bubble: 'Satoshi', sans-serif;
+    --font-feature: 'Satoshi', sans-serif;
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   }
@@ -123,7 +125,7 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, siteU
   }
 
   .heading-giant {
-    font-size: clamp(4rem, 13vw, 10rem);
+    font-size: clamp(2.5rem, 7vw, 5rem);
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 0.9;
