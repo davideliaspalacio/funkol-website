@@ -1,0 +1,228 @@
+---
+import Layout from "./Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  excerpt: string;
+  author: string;
+  date: Date;
+  coverImage?: string;
+  tags?: string[];
+}
+
+const { title, excerpt, author, date, coverImage, tags = [] } = Astro.props;
+
+const formattedDate = date.toLocaleDateString("es-ES", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const articleTitle = `${title} — Funkol Blog`;
+---
+
+<Layout
+  title={articleTitle}
+  description={excerpt}
+  ogImage={coverImage}
+  ogType="article"
+  articleDate={date.toISOString()}
+>
+  <Navbar />
+  <main class="blog-post">
+    <article class="post-content">
+      <header class="post-header">
+        <a href="/blog" class="back-link">&larr; volver al blog</a>
+        {tags.length > 0 && (
+          <div class="post-tags">
+            {tags.map((tag) => (
+              <span class="post-tag">{tag}</span>
+            ))}
+          </div>
+        )}
+        <h1 class="post-title">{title}</h1>
+        <div class="post-meta">
+          <span class="post-author">{author}</span>
+          <span class="meta-separator">·</span>
+          <time datetime={date.toISOString()}>{formattedDate}</time>
+        </div>
+        {coverImage && (
+          <img src={coverImage} alt="" class="post-cover" />
+        )}
+      </header>
+
+      <div class="post-body">
+        <slot />
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .blog-post {
+    background: var(--black);
+    min-height: 100vh;
+    padding: 8rem 2rem 6rem;
+  }
+
+  .post-content {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+
+  .back-link:hover {
+    color: var(--white);
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .post-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-transform: lowercase;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .post-author {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .meta-separator {
+    color: rgba(255, 255, 255, 0.2);
+  }
+
+  .post-cover {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 3rem;
+  }
+
+  .post-body {
+    font-family: var(--font);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .post-body :global(h2) {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 800;
+    color: var(--white);
+    margin: 2.5rem 0 1rem;
+    text-transform: lowercase;
+    letter-spacing: -0.02em;
+  }
+
+  .post-body :global(h3) {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--white);
+    margin: 2rem 0 0.75rem;
+    text-transform: lowercase;
+  }
+
+  .post-body :global(p) {
+    margin-bottom: 1.25rem;
+  }
+
+  .post-body :global(strong) {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .post-body :global(a) {
+    color: hsl(192, 89%, 63%);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .post-body :global(a:hover) {
+    color: var(--white);
+  }
+
+  .post-body :global(ul),
+  .post-body :global(ol) {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .post-body :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .post-body :global(blockquote) {
+    border-left: 3px solid rgba(255, 255, 255, 0.15);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-style: italic;
+  }
+
+  .post-body :global(code) {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  .post-body :global(img) {
+    max-width: 100%;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .blog-post {
+      padding: 7rem 1.25rem 4rem;
+    }
+  }
+</style>

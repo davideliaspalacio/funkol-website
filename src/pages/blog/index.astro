@@ -1,0 +1,179 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Layout
+  title="Blog — Funkol"
+  description="Tips, historias y novedades para creadores que monetizan su comunidad con Funkol."
+>
+  <Navbar />
+  <main class="blog-index">
+    <div class="blog-inner">
+      <header class="blog-header">
+        <span class="blog-eyebrow" data-reveal="pop">blog</span>
+        <h1 class="blog-heading" data-reveal data-delay="0.08">
+          historias de<br /><span class="blog-accent">creadores</span>
+        </h1>
+        <p class="blog-subtitle" data-reveal="fade" data-delay="0.16">
+          Tips, novedades y todo lo que necesitas para monetizar tu comunidad.
+        </p>
+      </header>
+
+      {posts.length > 0 ? (
+        <div class="blog-grid">
+          {posts.map((post, i) => (
+            <div data-reveal="scale" data-delay={String(0.1 + i * 0.08)}>
+              <BlogCard
+                title={post.data.title}
+                excerpt={post.data.excerpt}
+                author={post.data.author}
+                date={post.data.date}
+                slug={post.id}
+                coverImage={post.data.coverImage}
+                tags={post.data.tags}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="blog-empty" data-reveal="fade">Próximamente — posts en camino.</p>
+      )}
+    </div>
+
+    <!-- Glow orbs -->
+    <div class="blog-glow blog-glow-1" aria-hidden="true"></div>
+    <div class="blog-glow blog-glow-2" aria-hidden="true"></div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .blog-index {
+    background: var(--black);
+    min-height: 100vh;
+    padding: 8rem 2rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blog-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .blog-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .blog-eyebrow {
+    font-family: var(--font);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .blog-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    text-transform: lowercase;
+    color: var(--white);
+  }
+
+  .blog-accent {
+    background: linear-gradient(135deg, #00e5ff, #e040fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .blog-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 480px;
+    line-height: 1.5;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .blog-empty {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.1rem;
+    padding: 4rem 0;
+  }
+
+  /* Glow orbs */
+  .blog-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .blog-glow-1 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, #00e5ff, #536dfe);
+    top: -100px;
+    right: -150px;
+    animation: glow-drift 10s ease-in-out infinite alternate;
+  }
+
+  .blog-glow-2 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, #e040fb, #ff4081);
+    bottom: -80px;
+    left: -120px;
+    animation: glow-drift 12s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes glow-drift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(40px, -30px) scale(1.15); }
+  }
+
+  @media (max-width: 768px) {
+    .blog-index {
+      padding: 7rem 1.25rem 4rem;
+    }
+
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .blog-header {
+      margin-bottom: 3rem;
+    }
+  }
+</style>

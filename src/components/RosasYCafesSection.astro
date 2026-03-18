@@ -1,0 +1,340 @@
+---
+const gifts = [
+  {
+    emoji: "🌹",
+    name: "Rosas",
+    description: "Muestra tu admiración con una rosa virtual. Tu creador favorito recibe el dinero directamente.",
+    priceLabel: "desde $1",
+    gradient: "linear-gradient(135deg, #ff4081, #e040fb)",
+    glow: "rgba(255, 64, 129, 0.3)",
+  },
+  {
+    emoji: "☕",
+    name: "Cafés",
+    description: "Invita a un café a quien admiras. Una forma simple y directa de apoyar a tu creador.",
+    priceLabel: "desde $3",
+    gradient: "linear-gradient(135deg, #ff9100, #ffab40)",
+    glow: "rgba(255, 145, 0, 0.3)",
+  },
+];
+
+const appStoreUrl = "#";
+const googlePlayUrl = "#";
+---
+
+<section class="rosas-cafes">
+  <div class="section-line" aria-hidden="true"></div>
+
+  <div class="rc-inner">
+    <div class="rc-header">
+      <span class="rc-eyebrow" data-reveal="pop" data-delay="0">regalos virtuales</span>
+      <h2 class="rc-heading" data-reveal data-delay="0.08">
+        regala <span class="rc-accent">rosas</span> y <span class="rc-accent">cafés</span>
+      </h2>
+      <p class="rc-subtitle" data-reveal="fade" data-delay="0.16">
+        Apoya a tus creadores favoritos con regalos virtuales. Ellos reciben el 100% del valor.
+      </p>
+    </div>
+
+    <div class="rc-cards">
+      {gifts.map((gift, i) => (
+        <div
+          class="rc-card"
+          data-reveal="scale"
+          data-delay={String(0.1 + i * 0.12)}
+        >
+          <div class="rc-card-icon" style={`background: ${gift.gradient};`}>
+            <span class="rc-emoji">{gift.emoji}</span>
+          </div>
+          <div class="rc-card-glow" style={`background: ${gift.glow};`} aria-hidden="true"></div>
+          <h3 class="rc-card-name">{gift.name}</h3>
+          <p class="rc-card-desc">{gift.description}</p>
+          <span class="rc-card-price" style={`background: ${gift.gradient}; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;`}>
+            {gift.priceLabel}
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <div class="rc-cta" data-reveal="fade" data-delay="0.35">
+      <p class="rc-cta-text">Descarga Funkol y empieza a regalar</p>
+      <div class="rc-cta-buttons">
+        <a href={appStoreUrl} class="rc-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          App Store
+        </a>
+        <a href={googlePlayUrl} class="rc-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M3.18 23.76c.3.17.64.22.99.14l12.12-6.99-2.61-2.61-10.5 9.46zM.54 1.96C.2 2.3 0 2.87 0 3.61v16.78c0 .74.2 1.31.55 1.65l.09.08 9.4-9.4v-.22L.63 1.88l-.09.08zM20.46 10.37l-2.6-1.5-2.93 2.93 2.93 2.93 2.61-1.51c.75-.43.75-1.12 0-1.55l-.01-.3zM3.18.24L15.3 7.23l-2.61 2.61L2.17.38C2.47.2 2.87.19 3.18.24z"/>
+          </svg>
+          Google Play
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Glow orbs -->
+  <div class="rc-glow rc-glow-1" aria-hidden="true"></div>
+  <div class="rc-glow rc-glow-2" aria-hidden="true"></div>
+</section>
+
+<style>
+  .rosas-cafes {
+    background: var(--black);
+    position: relative;
+    z-index: 3;
+    padding: 7rem 2rem 8rem;
+    overflow: hidden;
+  }
+
+  .section-line {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 64, 129, 0.4), rgba(255, 145, 0, 0.4), transparent);
+  }
+
+  .rc-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .rc-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .rc-eyebrow {
+    font-family: var(--font);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .rc-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    text-transform: lowercase;
+    color: var(--white);
+  }
+
+  .rc-accent {
+    background: linear-gradient(135deg, #ff4081, #ff9100);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .rc-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 480px;
+    line-height: 1.5;
+  }
+
+  /* Cards */
+  .rc-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .rc-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+      border-color 0.3s ease,
+      background 0.3s ease;
+  }
+
+  .rc-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .rc-card-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .rc-emoji {
+    font-size: 2.5rem;
+    line-height: 1;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  }
+
+  .rc-card-glow {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    top: -40px;
+    right: -40px;
+    transition: opacity 0.3s ease;
+  }
+
+  .rc-card:hover .rc-card-glow {
+    opacity: 0.3;
+  }
+
+  .rc-card-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--white);
+    text-transform: lowercase;
+    letter-spacing: -0.01em;
+  }
+
+  .rc-card-desc {
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.55;
+  }
+
+  .rc-card-price {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-top: 0.25rem;
+  }
+
+  /* CTA */
+  .rc-cta {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .rc-cta-text {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+  }
+
+  .rc-cta-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .rc-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.75rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .rc-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+  }
+
+  /* Glow orbs */
+  .rc-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .rc-glow-1 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, #ff4081, #e040fb);
+    top: -150px;
+    left: -200px;
+    animation: rc-drift 9s ease-in-out infinite alternate;
+  }
+
+  .rc-glow-2 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, #ff9100, #ffab40);
+    bottom: -100px;
+    right: -150px;
+    animation: rc-drift 11s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes rc-drift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(30px, -25px) scale(1.12); }
+  }
+
+  @media (max-width: 768px) {
+    .rosas-cafes {
+      padding: 5rem 1.5rem;
+    }
+
+    .rc-cards {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .rc-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .rc-header {
+      margin-bottom: 3rem;
+    }
+  }
+</style>
